@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import AboutMe from './Components/AboutMe';
+import Projects from './Components/Projects';
+import Contact from './Components/Contact';
+import Leftbar from './Components/Leftbar';
+import Rightbar from './Components/Rightbar';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function App() {
+  // declaring a variable to use useState hook
+  const [theme,setTheme] = useState("dark");
+  const updateTheme = (newTheme) => {
+    setTheme(newTheme);
+  };
+  useEffect(()=>{
+    if(theme==="dark"){
+      document.body.classList.remove('body-light');
+      document.body.classList.add('body-dark');
+    }
+    if(theme==="light"){
+      document.body.classList.remove('body-dark');
+      document.body.classList.add('body-light');
+    }
+  },[theme]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex py-10">
+    <Router>
+      <Leftbar updateTheme={updateTheme} currentTheme={theme}/>
+        <Routes>
+          <Route exact path='/' element={<AboutMe currentTheme={theme}/>} ></Route>
+          <Route exact path='/projects' element={<Projects currentTheme={theme} />}></Route>
+          <Route exact path ='/contact'element={<Contact currentTheme={theme} /> }> </Route>
+        </Routes>
+      <Rightbar/>
+    </Router>
     </div>
   );
 }
