@@ -2,10 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 .body-light{
-  background-image: url("newportfolio\src\Assets\background-image-light.jpg");
+  background-image: url("./Assets/background-image-light.jpg");
 }
 .body-dark{
-  background-image: url("newportfolio\src\Assets\background-image.jpg");
+  background-image: url("./Assets/background-image.jpg");
 }
 body {
   margin: 0;
